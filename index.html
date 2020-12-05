@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title></title>
+  <style>
+    body {
+
+      background-image: url("clock.png");
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+
+    }
+
+    .clock-face {
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0, 0.63, 0.99, -0.24);
+    }
+
+    .circle,
+    .seconds,
+    .minutes,
+    .hours {
+      position: absolute;
+      background-color: black;
+      border-radius: 3px;
+      top: 50%;
+      left: 50%;
+      transform-origin: top;
+      transform: rotate(180deg);
+      background: #193549;
+    }
+
+    .circle {
+      border-radius: 100%;
+      top: 51.2%;
+      left: 49.78%;
+      width: 0.8%;
+      height: 2%;
+    }
+
+    @media (min-width: 850px) {
+
+      .seconds {
+        width: 4px;
+        height: 23%;
+      }
+
+      .minutes {
+        width: 8px;
+        height: 18%;
+
+      }
+
+      .hours {
+        width: 8px;
+        height: 12%;
+      }
+    }
+
+    @media (max-width: 850px) {
+      body {
+        background-size: 100%;
+      }
+
+      .seconds {
+        width: 4px;
+        height: 20%;
+      }
+
+      .minutes {
+        width: 8px;
+        height: 12%;
+
+      }
+
+      .hours {
+        width: 8px;
+        height: 8%;
+      }
+      .circle {
+        width: 1%;
+      }
+    }
+    @media (max-width: 500px) {
+      .seconds{
+        height: 15%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="clock">
+    <div class="clock-face">
+      <div class="circle"></div>
+      <div class="hand seconds"></div>
+      <div class="hand minutes"></div>
+      <div class="hand hours"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    function handRotation() {
+      var currentTime = new Date();
+      var hours = currentTime.getHours();
+      var min = currentTime.getMinutes();
+      var sec = currentTime.getSeconds();
+
+      var hourRotation = ((30 * hours) + (min / 2)) + 180;
+      var minRotation = (6 * min) + 180;
+      var secondsRotation = (6 * sec) + 180;
+
+      document.querySelector(".hours").style.transform = `rotate(${hourRotation}deg )`;
+      document.querySelector(".minutes").style.transform = `rotate(${minRotation}deg)`;
+      document.querySelector(".seconds").style.transform = `rotate(${secondsRotation}deg)`;
+    }
+
+    setInterval(handRotation, 1000);
+  </script>
+</body>
+
+</html>
